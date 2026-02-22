@@ -1,17 +1,17 @@
-# 🎵 AI Agent for Suno — Automated Personalized Song Generator
+# AI Agent for Suno — Automated Personalized Song Generator
 
 > An n8n-based AI automation pipeline that receives a client order via a web form, generates personalized song lyrics with a structured LLM, validates the output, builds a Suno-compatible music prompt, and delivers the result directly to Telegram — fully automated, zero manual work.
 
 ---
 
-## 📸 Workflow Overview
+## Workflow Overview
 
 <img width="1729" height="660" alt="Снимок экрана 2026-02-21 151919" src="https://github.com/user-attachments/assets/d9d37107-eb0f-4895-b1cc-63ff11de6a8f" />
 
 
 ---
 
-## ⚙️ How It Works
+## How It Works
 
 The pipeline consists of **11 nodes** that handle the full lifecycle of a song order — from raw form submission to a ready-to-use Suno prompt delivered to Telegram.
 
@@ -45,7 +45,7 @@ Send to Telegram
 
 ---
 
-## 🧩 Node Breakdown
+## Node Breakdown
 
 | Node | Type | Description |
 |------|------|-------------|
@@ -64,13 +64,13 @@ Send to Telegram
 
 ---
 
-## ✍️ Prompt Engineering
+## Prompt Engineering
 
 Two LLM nodes are at the core of the pipeline. Each prompt is carefully engineered to enforce deterministic, structured output — critical for downstream validation and Suno compatibility.
 
 ---
 
-### 🎼 Lyrics Generator
+### Lyrics Generator
 
 This node produces a personalized gift song. The prompt is split into a **system message** (role + output contract) and a **user message** (dynamic parameters).
 
@@ -147,7 +147,7 @@ Do NOT add explanations or formatting.
 
 ---
 
-### 🎧 Suno Prompt Generator
+### Suno Prompt Generator
 
 This node converts validated lyrics into a Suno-compatible music description. It receives structured lyrics from the Formatter and outputs a JSON object ready for direct use in Suno.
 
@@ -205,7 +205,7 @@ Return ONLY the JSON object defined in the system prompt.
 
 ---
 
-### 📦 Prompt Versioning
+### Prompt Versioning
 
 Every request is stamped with metadata before reaching the LLM:
 
@@ -224,7 +224,7 @@ This enables A/B testing, regression tracking, and reproducibility — if output
 
 ---
 
-### 🧪 Recommended Prompt Extensions
+### Recommended Prompt Extensions
 
 **Quality Check LLM (between Formatter → Suno Prompt Generator)**
 
@@ -266,7 +266,7 @@ Original output:
 
 ---
 
-## 🔧 Tech Stack
+## Tech Stack
 
 - **[n8n](https://n8n.io/)** — workflow automation platform (self-hosted or cloud)
 - **[OpenRouter](https://openrouter.ai/)** — LLM API gateway (supports GPT-4, Claude, Mistral, etc.)
@@ -276,7 +276,7 @@ Original output:
 
 ---
 
-## 🚀 Getting Started
+## Getting Started
 
 ### Prerequisites
 
@@ -303,7 +303,7 @@ The parser expects the following questions in the form:
 
 ---
 
-## 📐 Song Structure (Enforced)
+## Song Structure (Enforced)
 
 The **Lyrics Formatter** node strictly validates the following structure:
 
@@ -365,11 +365,11 @@ Chorus Ты мой оплот и вдохновенье, рядом ты все�
 
 ---
 
-## 🔮 Scalability & Extensions
+## Scalability & Extensions
 
 This agent is built as a modular pipeline and can be extended in multiple directions:
 
-### 📝 Custom Copywriting Orders
+### Custom Copywriting Orders
 The same architecture works for **any text generation use case**:
 - Birthday poems, toasts, wedding speeches
 - SEO articles and blog posts
@@ -378,7 +378,7 @@ The same architecture works for **any text generation use case**:
 
 Simply replace the Lyrics Generator system prompt with a copywriting prompt. The intake form, normalizer, and delivery nodes remain the same.
 
-### ✅ Quality Check LLM (Recommended Extension)
+### Quality Check LLM (Recommended Extension)
 
 Add a **QC node** between `Lyrics Formatter` and `Suno Prompt Generator`:
 
@@ -397,7 +397,7 @@ Lyrics Formatter
 
 This prevents low-quality outputs from reaching the client without any human review.
 
-### 🛡️ Error Handling (Recommended Extension)
+### Error Handling (Recommended Extension)
 
 Current pipeline has minimal error handling. Recommended additions:
 
@@ -410,7 +410,7 @@ Current pipeline has minimal error handling. Recommended additions:
 | Telegram send failure | Add an **Error Trigger** node → fallback to email notification |
 | Missing form fields | Validate required fields after parsing, send an automated reply requesting missing info |
 
-### 📊 Other Scaling Ideas
+### Other Scaling Ideas
 
 - **Google Sheets logging** — log every order with status, timestamp, and output for CRM tracking
 - **Airtable / Notion database** — build an order management board
@@ -422,7 +422,7 @@ Current pipeline has minimal error handling. Recommended additions:
 
 ---
 
-## 🔐 Security Notes
+## Security Notes
 
 - Phone numbers are **automatically stripped** from form responses before any LLM processing
 - No PII is stored within the workflow — only structured, normalized parameters are passed to the LLM
@@ -431,13 +431,13 @@ Current pipeline has minimal error handling. Recommended additions:
 
 ---
 
-## 🤝 Contributing
+## Contributing
 
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
 ---
 
-## 📄 License
+## License
 
 MIT
 
